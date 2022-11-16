@@ -1,5 +1,6 @@
-from PyQt5.QtWidgets import QLabel, QWidget, QVBoxLayout, QHBoxLayout, QPushButton
+from PyQt5.QtWidgets import QLabel, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QButtonGroup
 from PyQt5.QtCore import pyqtSignal
+from choise_color import Ui_Form
 
 
 class Choise_figure(QWidget):
@@ -34,15 +35,14 @@ class Choise_figure(QWidget):
         pass
 
 
-class Choise_color(QWidget):
+class Choise_color(QWidget, Ui_Form):
+    color = pyqtSignal(str)
+
     def __init__(self):
-        super(Choise_color, self).__init__()
-        self.setLayout(QVBoxLayout(self))
-        self.layout().addWidget(QLabel('Выберите цвет, за который будете играть', self))
-        self.layout().addChildLayout(QHBoxLayout(self))
-        self.whitebtn = QPushButton('БЕЛЫЙ', self)
-        self.blackbtn = QPushButton('ЧЕРНЫЙ', self)
-        self.layout().layout().addWidget(QPushButton('БЕЛЫЙ', self))
-        self.layout().layout().addWidget(QPushButton('ЧЕРНЫЙ', self))
-        self.whitebtn.clicked.connect(pyqtSignal('WHITE'))
-        self.blackbtn.clicked.connect(pyqtSignal('BLACK'))
+        super().__init__()
+        self.setupUi(self)
+        self.buttonGroup.buttonClicked.connect(self.send_signal)
+
+    def send_signal(self, btn):
+        self.color.emit(btn.text())
+        self.close()

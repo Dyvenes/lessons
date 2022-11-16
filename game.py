@@ -14,7 +14,17 @@ class Chess(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
         self.c = Choise_color()
+        self.c.show()
+        self.c.color.connect(self.set_color)
+
         self.rc = ()
+        self.color = 0
+
+    def set_color(self, color):
+        print(color)
+        if color == 'WHITE':
+            self.color = WHITE
+        self.color = BLACK
 
     def game(self):
         if self.current_player_color() == WHITE:
