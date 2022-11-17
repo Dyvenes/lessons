@@ -3,7 +3,7 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication
 from PyQt5.QtCore import Qt, pyqtSignal
 
-from denis import BLACK, WHITE, Pawn, King, Rook
+from denis import BLACK, WHITE, Pawn, King, Rook, Knight, Bishop, Queen
 from ch_board import Ui_MainWindow
 from denis2 import Choise_color
 
@@ -16,9 +16,23 @@ class Chess(QMainWindow, Ui_MainWindow):
         self.c = Choise_color()
         self.c.show()
         self.c.color.connect(self.set_color)
+        #перезапускать приложение
+        self.action.connect()
+        self.action_2.connect(exit)
 
         self.rc = ()
         self.color = 0
+        self.field = []
+        self.attack_field = [[()] * 8 for _ in range(8)]
+        self.main_fig = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
+
+        for row in range(8):
+            self.field.append([None] * 8)
+        for i in range(8):
+            self.field[0][i] = self.main_fig[i](WHITE)
+            self.field[1][i] = Pawn(WHITE)
+            self.field[7][i] = self.main_fig[i](BLACK)
+            self.field[6][i] = Pawn(BLACK)
 
     def set_color(self, color):
         print(color)
@@ -31,10 +45,7 @@ class Chess(QMainWindow, Ui_MainWindow):
             self.statusBar().showMessage('Ход белых')
         else:
             self.statusBar().showMessage('Ход черных')
-        row, col, row1, col1 = self.rc
-        row, col = row // 60 - 1, col // 60 - 1
-        row1, col1 = row1 // 60 - 1, col1 // 60 - 1
-        coordinats = (row, col, row1, col1)
+        coordinats = (row, col, row1, col1) = self.rc
         if not self.correct_coords(row, col) or not self.correct_coords(row1, col1):
            return
         if self.is_castling(coordinats):
@@ -68,11 +79,17 @@ class Chess(QMainWindow, Ui_MainWindow):
                 elif row1 == 7 and col1 == 6 and self.get_piece(0, 7) == Rook and \
                         self.get_piece(0, 7).poss_cast:
                     self.castling(7, 4, 7, 6, 7, 7, 7, 5)
+        for
         return
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
-            self.rc += (event.x, event.y)
+            x = event.x // 60 - 1
+            y = event.y // 60 - 1
+            if self.correct_coords(x, y):
+                self.rc += (x, y)
+        if len(self.rc) == 4:
+            self.game()
 
     def exit(self):
         sys.exit(app.exec())
@@ -105,16 +122,16 @@ class Chess(QMainWindow, Ui_MainWindow):
     # return c + piece.char()
 
     def get_piece(self, row, col):
-        return self.field[row][col].figure()
+        return self.field[row][col]
 
     def move_piece(self, row, col, row1, col1):
         # if not correct_coords(row, col) or not correct_coords(row1, col1):
         #    return False
         # if row == row1 and col == col1:
         #    return False
-        if self.field[row][col].type is None:
+        if self.field[row][col] is None:
             return False
-        piece = self.field[row][col].figure()
+        piece = self.field[row][col]
         if piece.get_color() != self.color:
             return False
         dan = self.danger()
@@ -124,31 +141,31 @@ class Chess(QMainWindow, Ui_MainWindow):
             return False
         else:
             self.ch = 0
-        if self.field[row1][col1].type is None:
-            if not piece.can_move(self, row, col, row1, col1):
+        if self.field[row1][col1] is None:
+            if not piece.can_move(self.field, row, col, row1, col1):
                 return False
-        elif self.field[row1][col1].figure().get_color() == self.opponent(piece.get_color()):
-            if not piece.can_attack(self, row, col, row1, col1):
+        elif self.field[row1][col1].get_color() == self.opponent(piece.get_color()):
+            if not piece.can_attack(self.field, row, col, row1, col1):
                 return
         if piece == Pawn and ((self.color == WHITE and row1 == 7) or
                               (self.color == BLACK and row1 == 0)):
             piece = piece.metamorphose()
-        self.field[row][col].type = None
-        self.field[row1][col1].type = piece
+        self.field[row][col] = None
+        self.field[row1][col1] = piece
         self.color = self.opponent(self.color)
         return True
 
     def castling(self, kr, kc, kr1, kc1, rr, rc, rr1, rc1):
-        self.field[kr][kc].type = None
-        self.field[kr1][kc1].type = King
-        self.field[rr][rc].type = None
-        self.field[rr1][rc1].type = Rook
+        self.field[kr][kc] = None
+        self.field[kr1][kc1] = King(self.color)
+        self.field[rr][rc] = None
+        self.field[rr1][rc1] = Rook(self.color)
 
     def attack_field_func(self):
         for r in range(8):
             for c in range(8):
-                if self.field[r][c] and self.field[r][c].figure().get_color() != self.color:
-                    self.attack_field = self.field[r][c].figure().paint_field(self, self.attack_field, r, c)
+                if self.field[r][c] and self.field[r][c].get_color() != self.color:
+                    self.attack_field = self.field[r][c].paint_field(self.field, self.attack_field, r, c)
 
     def clear_atfld(self):
         self.attack_field = [[()] * 8 for _ in range(8)]
@@ -158,7 +175,6 @@ class Chess(QMainWindow, Ui_MainWindow):
             for j in i:
                 if not j:
                     continue
-                j = j.figure()
                 if j.get_type() == "King" and j.get_color() == self.color:
                     return j.danger(self, self.attack_field, self.ch)
 

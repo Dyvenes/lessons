@@ -26,6 +26,11 @@
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
+      <widget class="QLabel" name="label_81">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
       <widget class="QLabel" name="label">
        <property name="minimumSize">
         <size>
@@ -55,7 +60,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>A</string>
+        <string>    A</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_12">
@@ -87,7 +92,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>B</string>
+        <string>    B</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_21">
@@ -119,7 +124,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>C</string>
+        <string>    C</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_30">
@@ -151,7 +156,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>D</string>
+        <string>    D</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_39">
@@ -183,7 +188,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>E</string>
+        <string>    E</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_48">
@@ -215,7 +220,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>F</string>
+        <string>    F</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_57">
@@ -247,7 +252,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>G</string>
+        <string>    G</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_66">
@@ -279,7 +284,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>H</string>
+        <string>    H</string>
        </property>
       </widget>
      </widget>
@@ -318,7 +323,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>8</string>
+        <string>    8</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_2">
@@ -379,7 +384,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -443,7 +448,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -507,7 +512,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -571,7 +576,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -613,7 +618,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>7</string>
+        <string>    7</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_3">
@@ -642,7 +647,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -706,7 +711,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -770,7 +775,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -834,7 +839,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -908,7 +913,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>6</string>
+        <string>    6</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_4">
@@ -969,7 +974,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -1033,7 +1038,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -1097,7 +1102,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -1161,7 +1166,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -1203,7 +1208,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>5</string>
+        <string>    5</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_5">
@@ -1232,7 +1237,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -1296,7 +1301,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -1360,7 +1365,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -1424,7 +1429,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -1498,7 +1503,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>4</string>
+        <string>    4</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_6">
@@ -1559,7 +1564,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -1623,7 +1628,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -1687,7 +1692,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -1751,7 +1756,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -1793,7 +1798,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>3</string>
+        <string>    3</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_7">
@@ -1822,7 +1827,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -1886,7 +1891,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -1950,7 +1955,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -2014,7 +2019,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -2088,7 +2093,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>2</string>
+        <string>    2</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_8">
@@ -2149,7 +2154,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -2213,7 +2218,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -2277,7 +2282,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -2341,7 +2346,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -2383,7 +2388,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>1</string>
+        <string>    1</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_9">
@@ -2412,7 +2417,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -2476,7 +2481,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -2540,7 +2545,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
@@ -2604,7 +2609,7 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color : black</string>
+        <string notr="true">background-color : grey</string>
        </property>
        <property name="text">
         <string/>
