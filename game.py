@@ -13,19 +13,21 @@ class Chess(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
 
-        self.signal_color = Choise_color()
-        self.signal_color.show()
-        self.signal_color.color.connect(self.set_color)
-        # перезапускать приложение
-        self.action.connect()
-        self.action_2.connect(self.exit)
+        self.new_game()
+        self.action.triggered(self.new_game)
+        self.action_2.triggered(self.exit)
 
         self.rc = ()
         self.color = 0
         self.field = []
-        self.attack_field = [[()] * 8 for _ in range(8)]
+        self.count_steps = 0
+        self.attack_field = None
+        self.signal_color = None
         self.main_fig = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
 
+    def new_game(self):
+        self.attack_field = [[()] * 8 for _ in range(8)]
+        self.field = []
         for row in range(8):
             self.field.append([None] * 8)
         for i in range(8):
@@ -33,6 +35,19 @@ class Chess(QMainWindow, Ui_MainWindow):
             self.field[1][i] = Pawn(WHITE)
             self.field[7][i] = self.main_fig[i](BLACK)
             self.field[6][i] = Pawn(BLACK)
+        for r in range(8):
+            for c in range(8):
+                if self.field[r][c]:
+                    pix_name = self.field[r][c].char()
+                    eval(f'self.cell{r}{c}.setPixmap(QPixmap({pix_name}{self.field[r][c].get_color()}.png)')
+        self.rc = ()
+        self.color = 0
+        self.field = []
+        self.count_steps = 0
+
+        self.signal_color = Choise_color()
+        self.signal_color.show()
+        self.signal_color.color.connect(self.set_color)
 
     def set_color(self, color):
         print(color)
@@ -43,7 +58,7 @@ class Chess(QMainWindow, Ui_MainWindow):
     def end_of_game(self, choise):
         if choise == 'выйти':
             self.exit()
-        # новая игра
+        self.new_game()
 
     def game(self):
         if self.current_player_color() == WHITE:
