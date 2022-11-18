@@ -131,15 +131,17 @@ class Pawn(Figure):
 
         return False
 
-    def metamorphose(self):
-        choise_fig = None
-        objct_choise = Choise_figure()
+    def meta_signal(self):
+        choise_fig = Choise_figure()
         choise_fig.show()
-        if choise_fig == 1:
+        choise_fig.figure.connect(self.metamorphose)
+
+    def metamorphose(self, choise_fig):
+        if choise_fig == 'Bishop':
             return Bishop(self.color)
-        elif choise_fig == 2:
+        elif choise_fig == 'Knight':
             return Knight(self.color)
-        elif choise_fig == 3:
+        elif choise_fig == 'Rook':
             return Rook(self.color)
         else:
             return Queen(self.color)

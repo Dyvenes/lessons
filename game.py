@@ -1,11 +1,11 @@
 import sys
 
 from PyQt5.QtWidgets import QMainWindow, QApplication
-from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtCore import Qt
 
 from denis import BLACK, WHITE, Pawn, King, Rook, Knight, Bishop, Queen
 from ch_board import Ui_MainWindow
-from denis2 import Choise_color
+from denis2 import Choise_color, end_of_game
 
 
 class Chess(QMainWindow, Ui_MainWindow):
@@ -13,12 +13,12 @@ class Chess(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
 
-        self.c = Choise_color()
-        self.c.show()
-        self.c.color.connect(self.set_color)
-        #перезапускать приложение
+        self.signal_color = Choise_color()
+        self.signal_color.show()
+        self.signal_color.color.connect(self.set_color)
+        # перезапускать приложение
         self.action.connect()
-        self.action_2.connect(exit)
+        self.action_2.connect(self.exit)
 
         self.rc = ()
         self.color = 0
@@ -40,6 +40,11 @@ class Chess(QMainWindow, Ui_MainWindow):
             self.color = WHITE
         self.color = BLACK
 
+    def end_of_game(self, choise):
+        if choise == 'выйти':
+            self.exit()
+        # новая игра
+
     def game(self):
         if self.current_player_color() == WHITE:
             self.statusBar().showMessage('Ход белых')
@@ -47,7 +52,7 @@ class Chess(QMainWindow, Ui_MainWindow):
             self.statusBar().showMessage('Ход черных')
         coordinats = (row, col, row1, col1) = self.rc
         if not self.correct_coords(row, col) or not self.correct_coords(row1, col1):
-           return
+            return
         if self.is_castling(coordinats):
             if self.move_piece(row, col, row1, col1):
                 self.clear_atfld()
@@ -55,8 +60,9 @@ class Chess(QMainWindow, Ui_MainWindow):
                 dan = self.danger()
                 if dan == "мат":
                     if self.current_player_color() == WHITE:
-                        # показать окно о том, кто победил
-                        # запускать окно с выбором цвета
+                        self.win = end_of_game()
+                        self.win.show()
+                        self.win.choise.connect()
                         return
                     return
             else:
@@ -79,7 +85,13 @@ class Chess(QMainWindow, Ui_MainWindow):
                 elif row1 == 7 and col1 == 6 and self.get_piece(0, 7) == Rook and \
                         self.get_piece(0, 7).poss_cast:
                     self.castling(7, 4, 7, 6, 7, 7, 7, 5)
-        for
+        # отрисовка поля в окне игры
+        for r in range(8):
+            for c in range(8):
+                if self.field[r][c]:
+                    pix_name = self.field[r][c].char()
+                    eval(f'self.cell{r}{c}.setPixmap(QPixmap({pix_name}{self.field[r][c].get_color()}.png)')
+
         return
 
     def mousePressEvent(self, event):
@@ -113,22 +125,12 @@ class Chess(QMainWindow, Ui_MainWindow):
     def current_player_color(self):
         return self.color
 
-    #   def cell(self, row, col):
-    #      if self.field[row][col] is None:
-    #         return '  '
-    #    piece = self.field[row][col].figure()
-    #   color = piece.get_color()
-    #  c = 'w' if color == WHITE else 'b'
-    # return c + piece.char()
-
     def get_piece(self, row, col):
         return self.field[row][col]
 
     def move_piece(self, row, col, row1, col1):
-        # if not correct_coords(row, col) or not correct_coords(row1, col1):
-        #    return False
-        # if row == row1 and col == col1:
-        #    return False
+        if row == row1 and col == col1:
+            return False
         if self.field[row][col] is None:
             return False
         piece = self.field[row][col]

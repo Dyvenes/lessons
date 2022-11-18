@@ -1,9 +1,12 @@
 from PyQt5.QtWidgets import QLabel, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QButtonGroup
 from PyQt5.QtCore import pyqtSignal
 from choise_color import Ui_Form
+from victory import Ui_Form_2
 
 
 class Choise_figure(QWidget):
+    figure = pyqtSignal(str)
+
     def __init__(self):
         super().__init__()
         self.setWindowTitle('ВЫБОР ФИГУРЫ')
@@ -26,13 +29,17 @@ class Choise_figure(QWidget):
         self.pushButton.setText('Bishop')
         self.horizontalLayout.addWidget(self.pushButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.pushButton.clicked.connect(self.click)
-        self.pushButton_2.clicked.connect(self.click)
-        self.pushButton_3.clicked.connect(self.click)
-        self.pushButton_4.clicked.connect(self.click)
+        self.buttonGroup = QButtonGroup(self)
+        self.buttonGroup.setObjectName("buttonGroup")
+        self.buttonGroup.addButton(self.pushButton)
+        self.buttonGroup.addButton(self.pushButton_2)
+        self.buttonGroup.addButton(self.pushButton_3)
+        self.buttonGroup.addButton(self.pushButton_4)
+        self.buttonGroup.buttonClicked.connect(self.send_signal)
 
-    def click(self):
-        pass
+    def send_signal(self, btn):
+        self.figure.emit(btn.text())
+        self.close()
 
 
 class Choise_color(QWidget, Ui_Form):
@@ -45,4 +52,21 @@ class Choise_color(QWidget, Ui_Form):
 
     def send_signal(self, btn):
         self.color.emit(btn.text())
+        self.close()
+
+
+class end_of_game(QWidget, Ui_Form_2):
+    choise = pyqtSignal(str)
+
+    def __init__(self, color):
+        super().__init__()
+        self.color = color
+        if self.color:
+            self.label.setText('БЕЛЫЕ ВЫИГРАЛИ!')
+        else:
+            self.label.setText('ЧЕРНЫЕ ВЫИГРАЛИ!')
+        self.buttonGroup.buttonClicked.connect(self.send_signal)
+
+    def send_signal(self, btn):
+        self.choise.emit(btn.text())
         self.close()
