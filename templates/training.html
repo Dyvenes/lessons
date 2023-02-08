@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if prof in ('инженер', 'строитель') %}
+        <h2>Инженерные тренажеры</h2>
+        <img src="https://live.staticflickr.com/65535/51290601119_13b9fc2aee_b.jpg" alt="Инженерные тренажеры">
+    {% else %}
+        <h2>Инженерные симуляторы</h2>
+        <img src="http://www.aerospaceprojectsreview.com/blog/wp-content/uploads/2013/11/lockshuttle1.gif" alt="Инженерные симуляторы">
+    {% endif %}
+{% endblock %}
+
