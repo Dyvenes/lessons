@@ -1,43 +1,22 @@
-import flask
-from flask import render_template, Flask
+from flask import Flask, render_template
+from data import db_session
+from data.users import User
+from data.jobs import Jobs
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+
+@app.route('/works_log')
+def works_log():
+    session = db_session.create_session()
+    jobs = session.query(Jobs).all()
+    return render_template('index.html', jobs=jobs)
 
 
-@app.route('/')
-@app.route('/index')
-def index():
-    return render_template('index.html', title='заготовка')
-
-
-@app.route('/training/<prof>')
-def training(prof):
-    return render_template('training.html', title=prof)
-
-
-@app.route('/list_prof/<list>')
-def list_prof(list):
-    prof = (
-        'инженер-исследователь', 'пилот', "строитель", 'экзобиолог', 'врач', 'инженер по терраформированию',
-        'климатолог',
-        'пециалист по радиационной защите', 'астрогеолог', 'гляциолог', 'инженер жизнеобеспечения', 'метеоролог',
-        'оператор марсохода', 'киберинженер', 'штурман', 'пилот дронов')
-    return render_template('list_prof.html', list=list, prof=prof)
-
-
-@app.route('/answer')
-@app.route('/auto_answer')
-def auto_answer():
-    pasrams = {'title': 'Анкета',
-               "surname": "Сусвнин",
-               "name": "Иван",
-               "education": "4 класса",
-               "profession": "экскурсовод",
-               "sex": "м",
-               "motivation": "всегда мечтал застрять на Марсе",
-               'ready': 'всегда ready'}
-    return render_template('auto_answer.html', **pasrams)
-
-
-if __name__ == "__main__":
+def main():
+    db_session.global_init("db/mars_explorer.db")
     app.run()
+
+
+if __name__ == '__main__':
+    main()
