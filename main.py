@@ -73,7 +73,7 @@ def add_jobs():
 def main():
     db_session.global_init("db/mars_explorer.db")
     #session = db_session.create_session()
-    #user = User(name='testuser', email='mail@mail.ru')
+    #user = User(name='testuser2222', email='111mail@mail.ru')
     #user.set_password('12345678')
     #session.add(user)
     #session.commit()

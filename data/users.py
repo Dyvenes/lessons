@@ -1,14 +1,16 @@
 import datetime
 import sqlalchemy
+from flask_login import UserMixin
 from flask_wtf import FlaskForm
 from sqlalchemy import orm
 from wtforms import EmailField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from .db_session import SqlAlchemyBase
 
 
-class User(SqlAlchemyBase):
+class User(SqlAlchemyBase, UserMixin):
     __tablename__ = 'users'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
@@ -29,10 +31,10 @@ class User(SqlAlchemyBase):
         return f'<Colonist> {self.id} {self.surname} {self.name}'
 
     def set_password(self, password):
-        self.hashed_password = generate_hash_password(password)
+        self.hashed_password = generate_password_hash(password)
 
-    def check_password(self):
-        return self.hashed_password ==
+    def check_password(self, password):
+        return check_password_hash(self.hashed_password, password)
 
 
 class LoginForm(FlaskForm):
